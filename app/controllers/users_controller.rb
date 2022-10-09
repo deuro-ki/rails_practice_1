@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
 
   def index
-    @users = User.paginate(page: params[:page])
+    #@users = User.paginate(page: params[:page])
+    @users = params[:tag_id].present? ? Tag.find(params[:tag_id]).users.paginate(page: params[:page], per_page: 8).where.not(id: 1) : User.paginate(page: params[:page], per_page: 8).where.not(id: 1)
   end
 
   def show
@@ -68,7 +69,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :department, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :department, :password, :password_confirmation, tag_ids: [])
     end
 
     def basic_info_params

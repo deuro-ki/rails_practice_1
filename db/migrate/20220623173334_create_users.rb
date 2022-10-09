@@ -14,3 +14,9 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     add_index :users, :email, unique: true
   end
 end
+
+# rm db/development.sqlite3
+# bin/rails db:create db:migrate
+
+# rails db:migrate
+# rails db:seed

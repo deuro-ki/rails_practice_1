@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :position, dependent: :destroy
+  has_many :tags, through: :position, dependent: :destroy
+  
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
 

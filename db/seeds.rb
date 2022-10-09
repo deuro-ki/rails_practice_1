@@ -14,7 +14,7 @@ User.create!(name: "Sample User",
   password_confirmation: "password",
   admin: true)
 
-60.times do |n|
+10.times do |n|
 name  = Faker::Name.name
 email = "sample-#{n+1}@email.com"
 password = "password"
@@ -23,3 +23,20 @@ User.create!(name: name,
     password: password,
     password_confirmation: password)
 end
+
+Tag.create([
+  { name: 'ｍｇｒ'},
+  { name: '統括店長'},
+  { name: '店長'},
+  { name: '副店長'},
+  { name: 'エキスパート'},
+  { name: 'アソシエイト'},
+  { name: 'ジュニア'},
+  { name: 'フレッシャー'}
+])
+
+# rm db/development.sqlite3
+# bin/rails db:create db:migrate
+
+# rails db:migrate
+# rails db:seed
