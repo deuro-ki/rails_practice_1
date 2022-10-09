@@ -6,10 +6,16 @@ class UsersController < ApplicationController
 
   def index
     #@users = User.paginate(page: params[:page])
-    @users = params[:tag_id].present? ? Tag.find(params[:tag_id]).users.paginate(page: params[:page], per_page: 8).where.not(id: 1) : User.paginate(page: params[:page], per_page: 8).where.not(id: 1)
+    @users = params[:tag_id].present? && params[:search] != "" ? Tag.find(params[:tag_id]).users.paginate(page: params[:page], per_page: 8).where.not(id: 1) : User.paginate(page: params[:page], per_page: 8).where.not(id: 1)
+    @users = @users.where('name LIKE?', "%#{params[:search]}%") if params[:search].present?
   end
 
-  def show
+  def search
+    if params[:search] != ""
+      @users = User.search(params[:search])
+    else
+      @users = User.where.not(id: 1)
+    end
   end
 
   # csvインポート
@@ -17,6 +23,9 @@ class UsersController < ApplicationController
     User.import(params[:file])
     flash[:success] = "新規ユーザーを追加しました。"
     redirect_to users_url
+  end
+
+  def show
   end
 
   def new

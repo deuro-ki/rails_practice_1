@@ -45,10 +45,15 @@
 
 .position-search {
   text-align: right;
-  padding-top: 10px;
-  margin-right: 192px;
+  margin-right: -32px;
   // position: absolute;
-   font-size: 15px;
+  //  font-size: 15px;
+}
+
+.position-search2 {
+  text-align: right;
+  padding-top: 10px;
+  margin-right: 302px;
 }
 
 .position-color {
@@ -60,4 +65,7 @@
 
 .position {
   font-weight: bold;
+}
+
+.search-zone {
 }

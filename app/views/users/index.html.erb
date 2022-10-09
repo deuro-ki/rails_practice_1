@@ -12,6 +12,30 @@
   <% end %>
 </div>
 
+<div class= "search-zone">
+  <div class="row-container">
+    <div class="col-md4 col-md-offset-8">
+        <p>ユーザー名検索</p>
+      <%= form_with url: users_path, method: :get, local: true do |form| %>
+        <%= form.text_field :search, :placeholder => "名前を入力してください" %>
+        <%= form.submit '検索', name: nil, class: "btn btn-sm btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="position-search2">
+    <p>役職で検索</p>
+    <div class="position-search">
+      <%= form_tag users_path, method: :get, class: 'boards_searchForm' do %>
+        <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), {
+          prompt: '役職で検索',
+          onchange: 'submit(this.form);'
+        } %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div class="col-md-10 col-md-offset-1">
   <%= will_paginate %>
   <table class="table table-condensed table-hover" id="table-users">
