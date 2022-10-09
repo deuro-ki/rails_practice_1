@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
   root 'static_pages#top'
   get '/signup', to: 'users#new'
 
@@ -17,6 +16,7 @@ Rails.application.routes.draw do
       get 'edit_basic_info'
       patch 'update_basic_info'
     end
+    resources :attendances, only: :update
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

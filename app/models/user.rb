@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :attendances, dependent: :destroy
   has_many :position, dependent: :destroy
   has_many :tags, through: :position, dependent: :destroy
   
