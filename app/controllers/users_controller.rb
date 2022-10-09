@@ -11,6 +11,13 @@ class UsersController < ApplicationController
   def show
   end
 
+  # csvインポート
+  def import
+    User.import(params[:file])
+    flash[:success] = "新規ユーザーを追加しました。"
+    redirect_to users_url
+  end
+
   def new
     @user = User.new
   end

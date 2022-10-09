@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   #resources :users
 
   resources :users do
+    #csvインポート
+    collection {post :import}
     member do
       get 'edit_basic_info'
       patch 'update_basic_info'

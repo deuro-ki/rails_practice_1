@@ -47,5 +47,18 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  #csvインポート
+  def self.import(file)
+    CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+      user = find_by(id: row["id"]) || new
+      user.attributes = row.to_hash.slice(*updatable_attributes)
+      user.save
+    end
+  end
+ 
+ def self.updatable_attributes
+  ["name", "email", "department", "employee_number", "key_id", "basic_time", "designated_work_start_time", "designated_work_end_time", "superior", "admin", "password"]
+ end
+
 
 end
